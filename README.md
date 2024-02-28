@@ -1,1 +1,1 @@
-# coding-project-template
+# Full Stack Django Cloud Dev Project
