@@ -30,6 +30,7 @@ def get_request(endpoint, **kwargs):
 
 # Add code for get requests to back end
 
+# request_url = sentiment_analyzer_url+"analyze/"+text
 def analyze_review_sentiments(text):
     request_url = sentiment_analyzer_url+"analyze/"+text
     try:
@@ -39,7 +40,7 @@ def analyze_review_sentiments(text):
     except Exception as err:
         print(f"Unexpected {err=}, {type(err)=}")
         print("Network exception occurred")
-# request_url = sentiment_analyzer_url+"analyze/"+text
+
 # Add code for retrieving sentiments
 
 def post_review(data_dict):
@@ -50,3 +51,12 @@ def post_review(data_dict):
         return response.json()
     except:
         print("Network exception occurred")
+
+#Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
+def get_dealerships(request, state="All"):
+    if(state == "All"):
+        endpoint = "/fetchDealers"
+    else:
+        endpoint = "/fetchDealers/"+state
+    dealerships = get_request(endpoint)
+    return JsonResponse({"status":200,"dealers":dealerships})
